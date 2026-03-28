@@ -1,0 +1,1500 @@
+/* ==================== CSS Custom Properties ==================== */
+:root {
+    /* Theme variables for the customizer (Blue is default) */
+    --accent-primary: #3b82f6; 
+    --accent-secondary: #6366f1;
+    --accent-rgb: 59, 130, 246;
+
+    /* Legacy Dark Charcoal + Yellow/Gold Color Palette */
+    --primary-color: #111111;
+    --secondary-color: #1a1a1a;
+    --accent-color: var(--accent-primary);
+    --accent-hover: var(--accent-secondary);
+    --accent-gradient: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+    --success-color: #22c55e;
+    --warning-color: #f59e0b;
+    --danger-color: #ef4444;
+}
+
+:root[data-theme="green"] {
+    --accent-primary: #22c55e;
+    --accent-secondary: #10b981;
+    --accent-rgb: 34, 197, 94;
+}
+
+:root[data-theme="purple"] {
+    --accent-primary: #a855f7;
+    --accent-secondary: #d946ef;
+    --accent-rgb: 168, 85, 247;
+}
+
+:root[data-theme="gold"] {
+    --accent-primary: #f5c400;
+    --accent-secondary: #ffd740;
+    --accent-rgb: 245, 196, 0;
+}
+
+/* Base styles continuation */
+:root {
+
+    /* Dark Background Tones */
+    --bg-primary: #111111;
+    --bg-secondary: #1a1a1a;
+    --bg-tertiary: #222222;
+    --bg-card: #1e1e1e;
+    --bg-hover: #252525;
+    --bg-elevated: #282828;
+
+    /* Text Colors */
+    --text-primary: #f0f0f0;
+    --text-secondary: #c0c0c0;
+    --text-muted: #999999;
+
+    /* Border Colors */
+    --border-color: rgba(255, 255, 255, 0.07);
+    --border-accent: rgba(245, 196, 0, 0.3);
+
+    /* Risk Level Colors */
+    --risk-low: #22c55e;
+    --risk-medium: #f59e0b;
+    --risk-high: #f97316;
+    --risk-critical: #ef4444;
+
+    /* Spacing */
+    --spacing-xs: 0.5rem;
+    --spacing-sm: 1rem;
+    --spacing-md: 1.5rem;
+    --spacing-lg: 2rem;
+    --spacing-xl: 3rem;
+
+    /* Border Radius */
+    --radius-sm: 6px;
+    --radius-md: 8px;
+    --radius-lg: 12px;
+    --radius-xl: 16px;
+
+    /* Deep Dark Shadows */
+    --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.4);
+    --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.4);
+    --shadow-lg: 0 10px 30px rgba(0, 0, 0, 0.5);
+    --shadow-xl: 0 20px 60px rgba(0, 0, 0, 0.6);
+    --shadow-card: 0 2px 8px rgba(0, 0, 0, 0.35);
+    --shadow-card-hover: 0 8px 24px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(245, 196, 0, 0.12);
+
+    /* Transitions */
+    --transition-fast: 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-normal: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-spring: 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* ==================== Animations ==================== */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideInRight {
+    from {
+        opacity: 0;
+        transform: translateX(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes pulse {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.5;
+    }
+}
+
+@keyframes shimmer {
+    0% {
+        background-position: -200% 0;
+    }
+
+    100% {
+        background-position: 200% 0;
+    }
+}
+
+@keyframes dotMove {
+    0% {
+        left: 0;
+        opacity: 0;
+    }
+
+    10% {
+        opacity: 1;
+    }
+
+    90% {
+        opacity: 1;
+    }
+
+    100% {
+        left: calc(100% - 6px);
+        opacity: 0;
+    }
+}
+
+@keyframes livePulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.6);
+    }
+
+    70% {
+        box-shadow: 0 0 0 8px rgba(34, 197, 94, 0);
+    }
+
+    100% {
+        box-shadow: 0 0 0 0 rgba(34, 197, 94, 0);
+    }
+}
+
+/* ==================== Reset & Base Styles ==================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+    color: var(--text-primary);
+    background-color: #050505;
+    background-image: 
+        radial-gradient(ellipse at top left, rgba(var(--accent-rgb), 0.12) 0%, transparent 40%),
+        radial-gradient(ellipse at bottom right, rgba(var(--accent-rgb), 0.08) 0%, transparent 40%);
+    background-attachment: fixed;
+    height: 100%;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    letter-spacing: -0.011em;
+}
+
+/* --- Premium Glassmorphism Utilities --- */
+.glass-panel {
+    background: rgba(255, 255, 255, 0.02);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+}
+
+.glass-card {
+    background: rgba(255, 255, 255, 0.015);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.04);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.glass-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.glass-header {
+    background: rgba(10, 10, 10, 0.75);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* --- Smooth Animations --- */
+.animate-fade-in-up {
+    animation: fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    opacity: 0;
+}
+
+input:focus, select:focus {
+    outline: none;
+    border-color: var(--accent-primary) !important;
+    box-shadow: 0 0 0 3px rgba(var(--accent-rgb), 0.15);
+}
+
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-md);
+}
+
+/* ==================== Header & Navigation ==================== */
+.header {
+    background: #111111;
+    color: #f0f0f0;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.06);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.nav-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 70px;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    transition: opacity var(--transition-fast);
+}
+
+.logo:hover {
+    opacity: 0.85;
+}
+
+.logo-icon {
+    width: 26px;
+    height: 26px;
+    color: #F5C400;
+    filter: drop-shadow(0 0 6px rgba(245, 196, 0, 0.5));
+}
+
+.logo h2 {
+    font-size: 1.15rem;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    color: #F5C400;
+    margin: 0;
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+}
+
+.nav-link {
+    color: #aaaaaa;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 1rem;
+    padding: 10px 20px;
+    border-radius: 6px;
+    background: transparent;
+    border: 1px solid transparent;
+    cursor: pointer;
+    transition: all var(--transition-normal);
+    position: relative;
+}
+
+.nav-link:hover {
+    color: #f0f0f0;
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.nav-link.active {
+    color: #111111;
+    background: #F5C400;
+    border-color: transparent;
+    font-weight: 700;
+    box-shadow: 0 0 16px rgba(245, 196, 0, 0.25);
+}
+
+/* ==================== Hero Section ==================== */
+.hero {
+    padding: var(--spacing-xl) 0 var(--spacing-lg);
+    text-align: center;
+    background: transparent;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    position: relative;
+    overflow: hidden;
+}
+
+.hero::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle at 30% 20%, rgba(245, 196, 0, 0.04) 0%, transparent 50%),
+        radial-gradient(circle at 70% 80%, rgba(245, 196, 0, 0.03) 0%, transparent 50%);
+    pointer-events: none;
+}
+
+.hero-title {
+    font-size: 2.5rem;
+    font-weight: 800;
+    margin-bottom: 0.75rem;
+    color: #f0f0f0;
+    letter-spacing: -0.04em;
+    line-height: 1.1;
+    position: relative;
+    animation: fadeInUp 0.6s ease both;
+}
+
+.hero-subtitle {
+    font-size: 1.2rem;
+    color: #aaaaaa;
+    margin-bottom: var(--spacing-md);
+    font-weight: 400;
+    letter-spacing: -0.01em;
+    position: relative;
+    animation: fadeInUp 0.6s ease 0.1s both;
+}
+
+/* ==================== Stats Grid ==================== */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: var(--spacing-md);
+    margin-top: var(--spacing-xl);
+    position: relative;
+}
+
+.stat-card {
+    background: rgba(255, 255, 255, 0.015);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: var(--radius-md);
+    padding: 20px 24px;
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    transition: all var(--transition-normal);
+    animation: fadeInUp 0.5s ease both;
+    position: relative;
+    overflow: hidden;
+}
+
+.stat-card:nth-child(1) {
+    animation-delay: 0.05s;
+}
+
+.stat-card:nth-child(2) {
+    animation-delay: 0.1s;
+}
+
+.stat-card:nth-child(3) {
+    animation-delay: 0.15s;
+}
+
+.stat-card:nth-child(4) {
+    animation-delay: 0.2s;
+}
+
+.stat-card::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: var(--accent-gradient);
+    opacity: 0;
+    transition: opacity var(--transition-normal);
+}
+
+.stat-card:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-card-hover);
+    border-color: rgba(245, 196, 0, 0.2);
+}
+
+.stat-card:hover::after {
+    opacity: 1;
+}
+
+.stat-icon {
+    width: 52px;
+    height: 52px;
+    border-radius: var(--radius-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.stat-icon svg {
+    width: 24px;
+    height: 24px;
+}
+
+.flights-icon {
+    background: rgba(245, 196, 0, 0.12);
+    color: #F5C400;
+}
+
+.risk-icon {
+    background: rgba(239, 68, 68, 0.12);
+    color: #ef4444;
+}
+
+.accuracy-icon {
+    background: rgba(34, 197, 94, 0.12);
+    color: #22c55e;
+}
+
+.update-icon {
+    background: rgba(168, 85, 247, 0.12);
+    color: #a855f7;
+}
+
+.stat-content {
+    flex: 1;
+    text-align: left;
+}
+
+.stat-label {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+}
+
+.stat-value {
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: var(--text-primary);
+    line-height: 1.2;
+    margin-top: 2px;
+    letter-spacing: -0.03em;
+}
+
+.stat-value.small {
+    font-size: 1.4rem;
+    font-weight: 700;
+}
+
+.stat-value.high-risk {
+    color: var(--risk-critical);
+}
+
+/* ==================== Dashboard Section ==================== */
+.main-content-layout {
+    margin-right: 360px;
+    transition: margin-right var(--transition-normal);
+}
+
+.dashboard {
+    padding: var(--spacing-lg) 0;
+    animation: fadeIn 0.4s ease both;
+}
+
+/* ==================== Search Section ==================== */
+.search-section {
+    display: flex;
+    gap: var(--spacing-md);
+    margin-bottom: var(--spacing-lg);
+    animation: fadeInUp 0.5s ease 0.2s both;
+}
+
+.search-bar {
+    position: relative;
+    flex: 1;
+}
+
+.search-icon {
+    position: absolute;
+    left: 18px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 20px;
+    height: 20px;
+    color: var(--text-muted);
+    pointer-events: none;
+    transition: color var(--transition-fast);
+}
+
+.search-input {
+    width: 100%;
+    padding: 14px 18px 14px 56px;
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: var(--radius-md);
+    color: #f0f0f0;
+    font-size: 1rem;
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    transition: all var(--transition-normal);
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.search-input:focus {
+    outline: none;
+    border-color: rgba(245, 196, 0, 0.5);
+    box-shadow: 0 0 0 3px rgba(245, 196, 0, 0.1);
+}
+
+.search-input::placeholder {
+    color: #555;
+    font-weight: 400;
+}
+
+/* ==================== Filter Controls ==================== */
+.filter-controls {
+    display: flex;
+    gap: 12px;
+    width: 320px;
+}
+
+.filter-select {
+    flex: 1;
+    padding: 13px 16px;
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: var(--radius-md);
+    color: #f0f0f0;
+    font-size: 1rem;
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 12 12'%3E%3Cpath fill='%23aaaaaa' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 14px center;
+    padding-right: 36px;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.filter-select:focus {
+    outline: none;
+    border-color: rgba(245, 196, 0, 0.5);
+    box-shadow: 0 0 0 3px rgba(245, 196, 0, 0.1);
+}
+
+.filter-select option {
+    background: #1e1e1e;
+    color: #f0f0f0;
+}
+
+/* Hide pulse for now */
+.live-indicator,
+.pulse-dot {
+    display: none;
+}
+
+/* ==================== Flight Cards ==================== */
+.flights-grid {
+    display: grid;
+    gap: var(--spacing-md);
+}
+
+.flight-card {
+    background: rgba(255, 255, 255, 0.015);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: var(--radius-md);
+    padding: 20px 24px;
+    transition: all var(--transition-normal);
+    cursor: pointer;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    position: relative;
+    overflow: hidden;
+    animation: fadeInUp 0.4s ease both;
+}
+
+.flight-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    background: #cbd5e1;
+    transition: all var(--transition-normal);
+    border-radius: 4px 0 0 4px;
+}
+
+.flight-card:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-card-hover);
+    border-color: rgba(245, 196, 0, 0.2);
+}
+
+.flight-card:hover::before {
+    background: var(--accent-color);
+    width: 4px;
+}
+
+/* Risk-level left border colors */
+.flight-card:has(.risk-badge.low)::before {
+    background: var(--risk-low);
+}
+
+.flight-card:has(.risk-badge.medium)::before {
+    background: var(--risk-medium);
+}
+
+.flight-card:has(.risk-badge.high)::before {
+    background: var(--risk-high);
+}
+
+.flight-card:has(.risk-badge.critical)::before {
+    background: var(--risk-critical);
+}
+
+.flight-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: var(--spacing-md);
+}
+
+.flight-number {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--text-primary);
+    letter-spacing: -0.03em;
+}
+
+.airline {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    margin-top: 3px;
+    font-weight: 500;
+}
+
+.risk-badge {
+    padding: 6px 16px;
+    border-radius: var(--radius-sm);
+    font-size: 1rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    border: 1px solid transparent;
+    transition: all var(--transition-fast);
+}
+
+.risk-badge.low {
+    background: rgba(34, 197, 94, 0.12);
+    color: #22c55e;
+    border-color: rgba(34, 197, 94, 0.25);
+}
+
+.risk-badge.medium {
+    background: rgba(245, 158, 11, 0.12);
+    color: #f59e0b;
+    border-color: rgba(245, 158, 11, 0.25);
+}
+
+.risk-badge.high {
+    background: rgba(249, 115, 22, 0.12);
+    color: #f97316;
+    border-color: rgba(249, 115, 22, 0.25);
+}
+
+.risk-badge.critical {
+    background: rgba(239, 68, 68, 0.12);
+    color: #ef4444;
+    border-color: rgba(239, 68, 68, 0.25);
+    animation: pulse 2s infinite;
+}
+
+.flight-route {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+    margin-bottom: var(--spacing-md);
+    padding: 16px 0;
+}
+
+.airport-code {
+    font-size: 1.75rem;
+    font-weight: 800;
+    color: var(--text-primary);
+    letter-spacing: -0.03em;
+}
+
+.route-arrow {
+    flex: 1;
+    height: 2px;
+    background: linear-gradient(90deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.2));
+    position: relative;
+    border-radius: 2px;
+}
+
+.route-arrow::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 6px;
+    height: 6px;
+    background: #F5C400;
+    border-radius: 50%;
+    animation: dotMove 3s linear infinite;
+    box-shadow: 0 0 8px rgba(245, 196, 0, 0.7);
+}
+
+.route-arrow::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 0;
+    height: 0;
+    border-left: 7px solid rgba(255, 255, 255, 0.2);
+    border-top: 4px solid transparent;
+    border-bottom: 4px solid transparent;
+}
+
+.flight-details {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: var(--spacing-md);
+    margin-bottom: var(--spacing-md);
+    padding: 14px 16px;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: var(--radius-md);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.detail-item {
+    display: flex;
+    flex-direction: column;
+}
+
+.detail-label {
+    font-size: 1rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 4px;
+    font-weight: 600;
+}
+
+.detail-value {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+.delay-prediction {
+    background: rgba(239, 68, 68, 0.08);
+    border-left: 3px solid var(--risk-critical);
+    padding: 12px 16px;
+    border-radius: 0 var(--radius-md) var(--radius-md) 0;
+    margin-bottom: var(--spacing-md);
+}
+
+.prediction-text {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: #f87171;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+}
+
+.prediction-time {
+    font-size: 1.35rem;
+    font-weight: 800;
+    color: #ef4444;
+    margin-top: 2px;
+    letter-spacing: -0.02em;
+}
+
+.contributing-factors {
+    margin-top: var(--spacing-md);
+}
+
+.factors-title {
+    font-size: 1.05rem;
+    color: var(--text-muted);
+    margin-bottom: var(--spacing-xs);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+}
+
+.factors-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+.factor-tag {
+    padding: 5px 12px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: var(--radius-sm);
+    font-size: 1rem;
+    color: #aaaaaa;
+    font-weight: 500;
+    transition: all var(--transition-fast);
+}
+
+.factor-tag:hover {
+    background: rgba(245, 196, 0, 0.1);
+    border-color: rgba(245, 196, 0, 0.3);
+    color: #F5C400;
+}
+
+/* ==================== Sidebar ==================== */
+.sidebar {
+    position: fixed;
+    right: 0;
+    top: 70px;
+    width: 360px;
+    height: calc(100vh - 70px);
+    background: #161616;
+    border-left: 1px solid rgba(255, 255, 255, 0.06);
+    overflow-y: auto;
+    box-shadow: -4px 0 20px rgba(0, 0, 0, 0.4);
+    animation: slideInRight 0.5s ease both;
+}
+
+.sidebar-content {
+    padding: 28px;
+}
+
+.sidebar-title {
+    font-size: 1.1rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 18px;
+    color: var(--text-muted);
+    display: flex;
+    align-items: center;
+}
+
+.sidebar-icon {
+    width: 18px;
+    height: 18px;
+    margin-right: 10px;
+    color: var(--accent-color);
+}
+
+.weather-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 32px;
+}
+
+.weather-item {
+    background: rgba(255, 255, 255, 0.04);
+    padding: 12px 14px;
+    border-radius: var(--radius-md);
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    display: flex;
+    flex-direction: column;
+    transition: all var(--transition-fast);
+}
+
+.weather-item:hover {
+    border-color: rgba(245, 196, 0, 0.2);
+    background: rgba(255, 255, 255, 0.06);
+}
+
+.weather-label {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--text-muted);
+    margin-bottom: 6px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+}
+
+.weather-value {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+.airport-info {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 32px;
+}
+
+.airport-item {
+    background: rgba(255, 255, 255, 0.04);
+    padding: 14px 16px;
+    border-radius: var(--radius-md);
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    transition: all var(--transition-fast);
+}
+
+.airport-item:hover {
+    border-color: rgba(245, 196, 0, 0.2);
+    background: rgba(255, 255, 255, 0.06);
+}
+
+.airport-name {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 10px;
+    line-height: 1.4;
+}
+
+.airport-status {
+    font-size: 0.95rem;
+}
+
+.status-indicator {
+    padding: 6px 14px;
+    border-radius: var(--radius-sm);
+    font-weight: 700;
+    font-size: 0.95rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.status-indicator::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+}
+
+.status-indicator.normal {
+    background: rgba(34, 197, 94, 0.1);
+    color: #22c55e;
+    border: 1px solid rgba(34, 197, 94, 0.25);
+}
+
+.status-indicator.normal::before {
+    background: #22c55e;
+}
+
+.status-indicator.delayed {
+    background: rgba(239, 68, 68, 0.1);
+    color: #ef4444;
+    border: 1px solid rgba(239, 68, 68, 0.25);
+}
+
+.status-indicator.delayed::before {
+    background: #ef4444;
+    animation: pulse 1.5s infinite;
+}
+
+/* ==================== News Items ==================== */
+.news-item {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    border-radius: var(--radius-md);
+    padding: 14px 16px;
+    margin-bottom: 10px;
+    transition: all var(--transition-normal);
+    cursor: pointer;
+}
+
+.news-item:hover {
+    border-color: rgba(245, 196, 0, 0.2);
+    background: rgba(255, 255, 255, 0.05);
+    transform: translateY(-1px);
+}
+
+.news-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.news-category {
+    font-size: 0.95rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--accent-color);
+    font-weight: 800;
+}
+
+.news-sentiment {
+    font-size: 0.95rem;
+    padding: 4px 12px;
+    border-radius: var(--radius-sm);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+}
+
+.news-sentiment.positive {
+    background: rgba(34, 197, 94, 0.1);
+    color: #22c55e;
+    border: 1px solid rgba(34, 197, 94, 0.25);
+}
+
+.news-sentiment.negative {
+    background: rgba(239, 68, 68, 0.1);
+    color: #ef4444;
+    border: 1px solid rgba(239, 68, 68, 0.25);
+}
+
+.news-sentiment.neutral {
+    background: rgba(245, 158, 11, 0.1);
+    color: #f59e0b;
+    border: 1px solid rgba(245, 158, 11, 0.25);
+}
+
+.news-title {
+    font-size: 1.15rem;
+    color: var(--text-primary);
+    line-height: 1.6;
+    margin-bottom: 12px;
+    font-weight: 600;
+}
+
+.news-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1rem;
+    color: var(--text-muted);
+}
+
+.news-airline {
+    font-weight: 600;
+    color: var(--text-secondary);
+}
+
+.news-time {
+    color: var(--text-muted);
+}
+
+/* ==================== Modal ==================== */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2000;
+}
+
+.modal.active {
+    display: block;
+}
+
+.modal-backdrop {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.75);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+}
+
+.modal-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+    max-width: 800px;
+    max-height: 90vh;
+    background: #1a1a1a;
+    border: 1px solid rgba(255, 255, 255, 0.09);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-xl);
+    overflow-y: auto;
+    animation: modalSlideIn 0.3s ease;
+    box-shadow: var(--shadow-xl);
+}
+
+@keyframes modalSlideIn {
+    from {
+        opacity: 0;
+        transform: translate(-50%, -45%);
+    }
+
+    to {
+        opacity: 1;
+        transform: translate(-50%, -50%);
+    }
+}
+
+.modal-close {
+    position: absolute;
+    top: var(--spacing-md);
+    right: var(--spacing-md);
+    width: 44px;
+    height: 44px;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    color: #aaaaaa;
+    cursor: pointer;
+    transition: all var(--transition-normal);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-close:hover {
+    background: rgba(239, 68, 68, 0.12);
+    border-color: rgba(239, 68, 68, 0.3);
+    color: #ef4444;
+}
+
+.modal-close svg {
+    width: 20px;
+    height: 20px;
+}
+
+/* ==================== Responsive Design ==================== */
+@media (max-width: 1200px) {
+    .main-content-layout {
+        margin-right: 0;
+    }
+
+    .sidebar {
+        display: none;
+    }
+}
+
+/* ==================== Accessibility: Sidebar top offset fix ==================== */
+.sidebar {
+    top: 70px;
+    height: calc(100vh - 70px);
+}
+
+@media (max-width: 768px) {
+    .hero-title {
+        font-size: 2rem;
+    }
+
+    .hero-subtitle {
+        font-size: 1rem;
+    }
+
+    .stats-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .search-section {
+        flex-direction: column;
+    }
+
+    .filter-controls {
+        width: 100%;
+    }
+
+    .nav-links {
+        gap: 2px;
+    }
+
+    .nav-link {
+        font-size: 0.8rem;
+        padding: 6px 12px;
+    }
+}
+
+@media (max-width: 480px) {
+    .flight-route {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .route-arrow {
+        width: 2px;
+        height: 30px;
+        background: linear-gradient(to bottom, var(--accent-color), #6366f1);
+    }
+
+    .route-arrow::after {
+        right: 50%;
+        bottom: 0;
+        top: auto;
+        transform: translateX(50%);
+        border-left: 5px solid transparent;
+        border-right: 5px solid transparent;
+        border-top: 8px solid #6366f1;
+        border-bottom: none;
+    }
+}
+
+/* ==================== Scrollbar ==================== */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.12);
+    border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(245, 196, 0, 0.3);
+}
+
+/* ==================== Update text ==================== */
+.update-text {
+    font-family: 'Inter', sans-serif !important;
+    font-size: 0.9rem !important;
+    color: var(--text-muted) !important;
+    font-weight: 500 !important;
+}
+
+/* ==================== Airport Congestion Heatmap ==================== */
+.heatmap-legend {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+    flex-wrap: wrap;
+    margin-bottom: 1.25rem;
+    padding: 12px 16px;
+    background: #1a1a1a;
+    border-radius: var(--radius-md);
+    border: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+.heatmap-wrapper {
+    overflow-x: auto;
+    border-radius: var(--radius-lg);
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    background: #161616;
+    box-shadow: var(--shadow-lg);
+}
+
+.heatmap-table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 1100px;
+}
+
+.heatmap-table thead {
+    position: sticky;
+    top: 0;
+    z-index: 2;
+}
+
+.heatmap-airport-header {
+    text-align: left;
+    padding: 12px 16px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: #999;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    background: #1a1a1a;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+    position: sticky;
+    left: 0;
+    z-index: 3;
+    min-width: 110px;
+}
+
+.heatmap-hour-header {
+    padding: 10px 4px;
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: #777;
+    text-align: center;
+    background: #1a1a1a;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+    min-width: 46px;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+}
+
+.heatmap-hour-header.heatmap-current-hour {
+    color: #F5C400;
+    background: rgba(245, 196, 0, 0.08);
+    box-shadow: inset 0 -2px 0 #F5C400;
+}
+
+.heatmap-row {
+    cursor: pointer;
+    transition: background var(--transition-fast);
+}
+
+.heatmap-row:hover {
+    background: rgba(255, 255, 255, 0.03);
+}
+
+.heatmap-row-selected {
+    background: rgba(245, 196, 0, 0.05) !important;
+}
+
+.heatmap-row-selected .heatmap-airport-cell {
+    border-left: 3px solid #F5C400;
+}
+
+.heatmap-airport-cell {
+    padding: 10px 14px;
+    background: #1a1a1a;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    position: sticky;
+    left: 0;
+    z-index: 1;
+    min-width: 110px;
+    border-left: 3px solid transparent;
+    transition: border-color var(--transition-fast);
+}
+
+.heatmap-cell {
+    padding: 0;
+    width: 46px;
+    height: 42px;
+    text-align: center;
+    vertical-align: middle;
+    border: 1px solid rgba(0, 0, 0, 0.25);
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+    position: relative;
+}
+
+.heatmap-cell:hover {
+    transform: scale(1.25);
+    z-index: 5;
+    box-shadow: 0 0 12px rgba(0, 0, 0, 0.5);
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+.heatmap-cell-value {
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.85);
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.heatmap-current-hour-cell {
+    box-shadow: inset 0 0 0 2px rgba(245, 196, 0, 0.5);
+}
+
+.heatmap-tooltip {
+    position: fixed;
+    transform: translate(-50%, -100%);
+    background: #1e1e1e;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: var(--radius-md);
+    padding: 12px 16px;
+    z-index: 10000;
+    pointer-events: none;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
+    min-width: 180px;
+    animation: fadeIn 0.15s ease;
+}
+
+/* ==================== Selection ==================== */
+::selection {
+    background: rgba(245, 196, 0, 0.2);
+    color: #f0f0f0;
+}
+
+/* ==================== Live Tracker Animations ==================== */
+@keyframes livePulse {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+
+    100% {
+        transform: scale(1.3);
+        opacity: 0.5;
+    }
+}
+
+input:focus {
+    outline: none;
+    border-color: rgba(245, 196, 0, 0.6) !important;
+    box-shadow: 0 0 0 3px rgba(245, 196, 0, 0.1);
+}
+
+/* ==========================================================================
+   Leaflet Map Styling & Overrides
+   ========================================================================== */
+
+.flight-map-section {
+    padding: 2rem 0;
+    margin-bottom: -1rem;
+    position: relative;
+    z-index: 10;
+}
+
+/* Dark theme overrides for Leaflet Tooltips */
+.leaflet-tooltip {
+    background-color: rgba(17, 17, 17, 0.95) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    color: var(--text-primary) !important;
+    border-radius: 8px !important;
+    padding: 10px 14px !important;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6) !important;
+    backdrop-filter: blur(12px) !important;
+    font-family: 'Inter', sans-serif !important;
+}
+
+.leaflet-tooltip-top:before { border-top-color: rgba(17, 17, 17, 0.95) !important; }
+.leaflet-tooltip-bottom:before { border-bottom-color: rgba(17, 17, 17, 0.95) !important; }
+.leaflet-tooltip-left:before { border-left-color: rgba(17, 17, 17, 0.95) !important; }
+.leaflet-tooltip-right:before { border-right-color: rgba(17, 17, 17, 0.95) !important; }
+
+/* Map Live Indicator */
+@keyframes mapLivePulse {
+    0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7); }
+    70% { transform: scale(1); box-shadow: 0 0 0 6px rgba(34, 197, 94, 0); }
+    100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(34, 197, 94, 0); }
+}
+
+/* Red ring pulse for delayed airports */
+.pulse-ring {
+    animation: delayedPulse 2s infinite;
+    transform-origin: center;
+}
+
+@keyframes delayedPulse {
+    0% { transform: scale(0.8); opacity: 0.8; }
+    100% { transform: scale(1.6); opacity: 0; }
+}
+
+.animated-flight-path {
+    stroke-dasharray: 12, 18;
+    animation: dash 35s linear infinite;
+}
+
+@keyframes dash {
+    to {
+        stroke-dashoffset: -1000;
+    }
+}
