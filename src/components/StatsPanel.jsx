@@ -11,6 +11,10 @@ function StatsPanel({ flights, lastUpdate }) {
 
     const [timeSince, setTimeSince] = useState('Just now');
 
+    const handleFullRefresh = () => {
+        window.location.reload();
+    };
+
     useEffect(() => {
         const interval = setInterval(() => {
             setTimeSince(formatTimeSince(lastUpdate));
@@ -70,7 +74,13 @@ function StatsPanel({ flights, lastUpdate }) {
             </div>
 
             {/* Last Update */}
-            <div className="stat-card">
+            <button
+                type="button"
+                className="stat-card stat-card-button"
+                onClick={handleFullRefresh}
+                aria-label={`${t('lastUpdate')}: ${timeSince}. Refresh page.`}
+                title="Refresh page"
+            >
                 <div className="stat-icon update-icon">
                     <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path
@@ -83,7 +93,7 @@ function StatsPanel({ flights, lastUpdate }) {
                     <p className="stat-label">{t('lastUpdate')}</p>
                     <p className="stat-value small">{timeSince}</p>
                 </div>
-            </div>
+            </button>
         </div>
     );
 }

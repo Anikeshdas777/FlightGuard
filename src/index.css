@@ -397,6 +397,19 @@ input:focus, select:focus {
     overflow: hidden;
 }
 
+.stat-card-button {
+    width: 100%;
+    font: inherit;
+    color: inherit;
+    text-align: left;
+    cursor: pointer;
+}
+
+.stat-card-button:focus-visible {
+    outline: 2px solid var(--accent-primary);
+    outline-offset: 3px;
+}
+
 .stat-card:nth-child(1) {
     animation-delay: 0.05s;
 }
