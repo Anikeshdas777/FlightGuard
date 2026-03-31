@@ -1,17 +1,21 @@
+// This file shows the holiday calendar used in prediction views.
 import React, { useState } from 'react';
 import { INDIAN_HOLIDAYS } from '../utils/predictionEngine';
 
 const DAYS = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 const MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
+// This function returns the number of days in a month.
 function getDaysInMonth(year, month) {
     return new Date(year, month + 1, 0).getDate();
 }
 
+// This function returns the starting weekday of a month.
 function getFirstDayOfMonth(year, month) {
     return new Date(year, month, 1).getDay();
 }
 
+// This component renders the calendar month view.
 function CalendarMonth({ year, month, holidays }) {
     const daysInMonth = getDaysInMonth(year, month);
     const firstDay = getFirstDayOfMonth(year, month);
@@ -46,6 +50,7 @@ function CalendarMonth({ year, month, holidays }) {
                 {days.map((day, idx) => {
                     if (!day) return <div key={`empty-${idx}`} />;
 
+                    // This function handles holiday.
                     const holiday = monthHolidays.find(h => {
                         const diff = Math.abs(day - h.date);
                         return diff <= h.radius;
@@ -99,6 +104,7 @@ function CalendarMonth({ year, month, holidays }) {
     );
 }
 
+// This component renders the holiday calendar view.
 export default function HolidayCalendar({ onClose }) {
     // Show current month and next month
     const [date, setDate] = useState(new Date());
@@ -108,6 +114,7 @@ export default function HolidayCalendar({ onClose }) {
 
     // Calculate next month correctly handling December roll-over
     const year2 = month1 === 11 ? year1 + 1 : year1;
+    // This function handles month2.
     const month2 = (month1 + 1) % 12;
 
     return (

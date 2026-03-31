@@ -1,3 +1,4 @@
+// This file stores the Hindi translation strings.
 const hi = {
     // Header / Nav
     dashboard: 'डैशबोर्ड',

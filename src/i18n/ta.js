@@ -1,3 +1,4 @@
+// This file stores the Tamil translation strings.
 const ta = {
     // Header / Nav
     dashboard: 'முகப்பு',

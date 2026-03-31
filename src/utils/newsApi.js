@@ -145,6 +145,7 @@ export async function fetchAviationNews() {
 
         // Deduplicate by cleaned title
         const seen = new Set();
+        // This function handles unique.
         const unique = allArticles.filter(a => {
             const key = a.title.toLowerCase().substring(0, 50);
             if (seen.has(key)) return false;

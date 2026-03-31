@@ -1,7 +1,9 @@
+// This file shows the sign-in and sign-up page.
 import React, { useState } from 'react';
 import { useAuth } from '../context/AuthContext.jsx';
 import { useLanguage } from '../context/LanguageContext.jsx';
 
+// This component renders the auth page view.
 export default function AuthPage() {
     const { t } = useLanguage();
     const [tab, setTab] = useState('login'); // 'login' | 'signup'
@@ -10,8 +12,10 @@ export default function AuthPage() {
     const [loading, setLoading] = useState(false);
     const { login, register } = useAuth();
 
+    // This function handles set.
     const set = (field) => (e) => setForm(f => ({ ...f, [field]: e.target.value }));
 
+    // This function handles handle submit.
     const handleSubmit = async (e) => {
         e.preventDefault();
         setError('');

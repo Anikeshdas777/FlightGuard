@@ -1,3 +1,4 @@
+// This file powers the standalone FlightGuard dashboard behavior.
 // ==================== Data Configuration ====================
 const AIRLINES = [
     'IndiGo', 'SpiceJet', 'Air India', 'Vistara', 'Go First',
@@ -58,19 +59,23 @@ let updateInterval = null;
 let lastUpdateTime = new Date();
 
 // ==================== Utility Functions ====================
+// This function returns a random whole number in a range.
 function randomInt(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
+// This function picks one random item from a list.
 function randomChoice(array) {
     return array[randomInt(0, array.length - 1)];
 }
 
+// This function picks multiple random items from a list.
 function randomChoices(array, count) {
     const shuffled = [...array].sort(() => 0.5 - Math.random());
     return shuffled.slice(0, count);
 }
 
+// This function formats a date into a simple time string.
 function formatTime(date) {
     return date.toLocaleTimeString('en-US', {
         hour: '2-digit',
@@ -79,6 +84,7 @@ function formatTime(date) {
     });
 }
 
+// This function builds a flight number from an airline name.
 function generateFlightNumber(airline) {
     const airlineCode = airline.substring(0, 2).toUpperCase();
     const number = randomInt(100, 9999);
@@ -86,6 +92,7 @@ function generateFlightNumber(airline) {
 }
 
 // ==================== Data Generation ====================
+// This function creates sample weather data for the app.
 function generateWeatherData() {
     return {
         condition: randomChoice(WEATHER_CONDITIONS),
@@ -96,6 +103,7 @@ function generateWeatherData() {
     };
 }
 
+// This function calculates a delay risk score for a flight.
 function calculateDelayRisk(weather, departureTime, factors) {
     let riskScore = randomInt(0, 30); // Base risk
 
@@ -125,6 +133,7 @@ function calculateDelayRisk(weather, departureTime, factors) {
     return Math.min(riskScore, 100);
 }
 
+// This function converts a risk score into a risk label.
 function getRiskLevel(score) {
     if (score < 25) return 'low';
     if (score < 50) return 'medium';
@@ -132,6 +141,7 @@ function getRiskLevel(score) {
     return 'critical';
 }
 
+// This function creates one sample flight record.
 function generateFlight() {
     const airline = randomChoice(AIRLINES);
     const origin = randomChoice(AIRPORTS);
@@ -179,6 +189,7 @@ function generateFlight() {
     };
 }
 
+// This function creates the starting list of sample flights.
 function generateInitialFlights(count = 12) {
     const flights = [];
     for (let i = 0; i < count; i++) {
@@ -188,6 +199,7 @@ function generateInitialFlights(count = 12) {
 }
 
 // ==================== UI Rendering ====================
+// This function renders one flight card in the standalone dashboard.
 function renderFlightCard(flight) {
     return `
         <div class="flight-card" data-id="${flight.id}" onclick="showFlightDetails('${flight.id}')">
@@ -241,6 +253,7 @@ function renderFlightCard(flight) {
     `;
 }
 
+// This function renders the current list of flights.
 function renderFlights() {
     const grid = document.getElementById('flightsGrid');
     if (filteredFlights.length === 0) {
@@ -250,6 +263,7 @@ function renderFlights() {
     }
 }
 
+// This function updates the dashboard summary numbers.
 function updateStats() {
     const totalFlights = allFlights.length;
     const highRiskFlights = allFlights.filter(f => f.riskLevel === 'high' || f.riskLevel === 'critical').length;
@@ -260,6 +274,7 @@ function updateStats() {
     document.getElementById('lastUpdate').textContent = formatTimeSince(lastUpdateTime);
 }
 
+// This function animates a number counting up in the UI.
 function animateCounter(elementId, target) {
     const element = document.getElementById(elementId);
     const current = parseInt(element.textContent) || 0;
@@ -279,6 +294,7 @@ function animateCounter(elementId, target) {
     }, 50);
 }
 
+// This function shows how much time has passed since a date.
 function formatTimeSince(date) {
     const seconds = Math.floor((new Date() - date) / 1000);
 
@@ -293,6 +309,7 @@ function formatTimeSince(date) {
 }
 
 // ==================== Weather & Airport Info ====================
+// This function renders the weather widget content.
 function renderWeatherInfo() {
     const weather = generateWeatherData();
     const html = `
@@ -316,6 +333,7 @@ function renderWeatherInfo() {
     document.getElementById('weatherInfo').innerHTML = html;
 }
 
+// This function renders the airport status widget content.
 function renderAirportInfo() {
     const airports = randomChoices(AIRPORTS, 3);
     const html = airports.map(airport => {
@@ -335,6 +353,7 @@ function renderAirportInfo() {
 }
 
 // ==================== News Feed ====================
+// This function creates a simple timestamp label for news.
 function generateNewsTimestamp() {
     const hoursAgo = randomInt(1, 24);
     const now = new Date();
@@ -342,6 +361,7 @@ function generateNewsTimestamp() {
     return `${hoursAgo}h ago`;
 }
 
+// This function renders one news item card.
 function renderNewsItem(newsItem) {
     const sentimentClass = newsItem.sentiment === 'positive' ? 'positive' : newsItem.sentiment === 'negative' ? 'negative' : 'neutral';
     const sentimentIcon = newsItem.sentiment === 'positive' ? '📈' : newsItem.sentiment === 'negative' ? '📉' : '📊';
@@ -361,6 +381,7 @@ function renderNewsItem(newsItem) {
     `;
 }
 
+// This function renders the news list.
 function renderNews() {
     const newsContainer = document.getElementById('newsContainer');
     if (!newsContainer) return;
@@ -370,6 +391,7 @@ function renderNews() {
 }
 
 // ==================== Modal ====================
+// This function opens the detailed view for a flight.
 function showFlightDetails(flightId) {
     const flight = allFlights.find(f => f.id === flightId);
     if (!flight) return;
@@ -470,11 +492,13 @@ function showFlightDetails(flightId) {
     document.getElementById('flightModal').classList.add('active');
 }
 
+// This function closes the open modal window.
 function closeModal() {
     document.getElementById('flightModal').classList.remove('active');
 }
 
 // ==================== Search & Filter ====================
+// This function applies the current flight filters.
 function applyFilters() {
     const searchTerm = document.getElementById('searchInput').value.toLowerCase();
     const riskFilter = document.getElementById('riskFilter').value;
@@ -508,6 +532,7 @@ function applyFilters() {
 }
 
 // ==================== Real-time Updates ====================
+// This function refreshes the live flight dashboard data.
 function updateFlightData() {
     // Randomly update some flights
     allFlights.forEach(flight => {
@@ -537,6 +562,7 @@ function updateFlightData() {
     updateStats();
 }
 
+// This function starts the repeating live update timer.
 function startLiveUpdates() {
     // Update every 5 seconds
     updateInterval = setInterval(() => {

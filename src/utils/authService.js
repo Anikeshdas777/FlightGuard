@@ -14,10 +14,12 @@ function getUsers() {
     catch { return {}; }
 }
 
+// This function saves the user list into local storage.
 function saveUsers(users) {
     localStorage.setItem(USERS_KEY, JSON.stringify(users));
 }
 
+// This function creates a simple hashed password value.
 function hashPassword(pw) {
     // Simple deterministic hash (sufficient for localStorage demo)
     let h = 0;
@@ -53,6 +55,7 @@ export function signUp(name, email, password) {
     return { user: session };
 }
 
+// This function signs in a saved user account.
 export function signIn(email, password) {
     const users = getUsers();
     const key = email.toLowerCase().trim();
@@ -66,10 +69,12 @@ export function signIn(email, password) {
     return { user: session };
 }
 
+// This function signs out the current user.
 export function signOut() {
     localStorage.removeItem(SESSION_KEY);
 }
 
+// This function returns the currently signed-in user.
 export function getCurrentUser() {
     try { return JSON.parse(localStorage.getItem(SESSION_KEY)); }
     catch { return null; }
@@ -82,6 +87,7 @@ function getUserData(uid) {
     return Object.values(users).find(u => u.uid === uid) || null;
 }
 
+// This function updates saved data for one user.
 function updateUserData(uid, patch) {
     const users = getUsers();
     const key = Object.keys(users).find(k => users[k].uid === uid);
@@ -96,6 +102,7 @@ export function getSavedRoutes(uid) {
     return data ? data.savedRoutes : [];
 }
 
+// This function saves a route for a user.
 export function saveRoute(uid, route) {
     const data = getUserData(uid);
     if (!data) return;
@@ -106,6 +113,7 @@ export function saveRoute(uid, route) {
     }
 }
 
+// This function removes one saved route for a user.
 export function removeRoute(uid, routeId) {
     const data = getUserData(uid);
     if (!data) return;
@@ -118,6 +126,7 @@ export function getTravelHistory(uid) {
     return data ? data.travelHistory : [];
 }
 
+// This function adds one entry to the user history.
 export function addToHistory(uid, entry) {
     const data = getUserData(uid);
     if (!data) return;
@@ -133,6 +142,7 @@ export function getPreferences(uid) {
     return data ? data.preferences : { homeAirport: '', favoriteAirlines: [] };
 }
 
+// This function saves the user preferences.
 export function savePreferences(uid, prefs) {
     updateUserData(uid, { preferences: prefs });
 }

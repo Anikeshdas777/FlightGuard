@@ -1,3 +1,4 @@
+// This file fetches weather data and converts it into risk values.
 const API_KEY = '5835428bae1c076a5c463bd8db2fc976';
 const BASE_URL = 'https://api.openweathermap.org/data/2.5/weather';
 

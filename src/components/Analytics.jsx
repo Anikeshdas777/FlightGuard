@@ -1,3 +1,4 @@
+// This file shows the analytics dashboard and trend summaries.
 import React from 'react';
 
 // Dark theme tokens
@@ -52,6 +53,7 @@ const HIGH_RISK_ROUTES = [
     { route: 'BOM → COK', riskScore: 60, reason: 'Monsoon winds', trend: '→' },
 ];
 
+// This component renders the stat card view.
 function StatCard({ label, value, sub, color, icon }) {
     return (
         <div style={{
@@ -78,6 +80,7 @@ function StatCard({ label, value, sub, color, icon }) {
     );
 }
 
+// This component renders the analytics view.
 export default function Analytics() {
     const maxBar = Math.max(...MONTHLY.map(m => m.delays));
 
@@ -229,6 +232,7 @@ export default function Analytics() {
     );
 }
 
+// This component renders the legend dot view.
 function LegendDot({ color, label }) {
     return (
         <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>

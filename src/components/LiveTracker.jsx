@@ -1,3 +1,4 @@
+// This file shows the live flight tracking page.
 import React, { useState, useEffect, useCallback } from 'react';
 import { fetchLiveFlights } from '../utils/airlabsApi.js';
 
@@ -31,6 +32,7 @@ const CITY_NAMES = {
     IXM: 'Madurai', IXE: 'Mangalore', CNN: 'Kannur',
 };
 
+// This component renders the live tracker view.
 function LiveTracker({ news = [] }) {
     const [flights, setFlights] = useState([]);
     const [loading, setLoading] = useState(false);
@@ -46,6 +48,7 @@ function LiveTracker({ news = [] }) {
         flight_iata: ''
     });
 
+    // This function handles handle search.
     const handleSearch = useCallback(async () => {
         if (!searchParams.dep_iata && !searchParams.flight_iata) {
             setError("Please enter a Departure Airport (e.g., DEL) or a Flight Number.");
@@ -80,6 +83,7 @@ function LiveTracker({ news = [] }) {
     const activeCount = flights.filter(f => f.status === 'active').length;
     const delayedCount = flights.filter(f => f.actualDelay > 15).length;
 
+    // This function handles get status style.
     const getStatusStyle = (status) => {
         switch (status) {
             case 'active': return { bg: 'rgba(34,197,94,0.12)', color: D.green, border: 'rgba(34,197,94,0.25)', label: '🟢 ACTIVE' };

@@ -1,7 +1,9 @@
+// This file shows the dashboard summary statistics.
 import React, { useState, useEffect, useRef } from 'react';
 import { formatTimeSince } from '../utils/flightUtils.js';
 import { useLanguage } from '../context/LanguageContext.jsx';
 
+// This component renders the stats panel view.
 function StatsPanel({ flights, lastUpdate }) {
     const { t } = useLanguage();
     const totalFlights = flights.length;
@@ -11,11 +13,13 @@ function StatsPanel({ flights, lastUpdate }) {
 
     const [timeSince, setTimeSince] = useState('Just now');
 
+    // This function handles handle full refresh.
     const handleFullRefresh = () => {
         window.location.reload();
     };
 
     useEffect(() => {
+        // This function handles interval.
         const interval = setInterval(() => {
             setTimeSince(formatTimeSince(lastUpdate));
         }, 1000);

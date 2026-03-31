@@ -1,6 +1,8 @@
+// This file shows the about page for FlightGuard.
 import React from 'react';
 import { useLanguage } from '../context/LanguageContext.jsx';
 
+// This component renders the about view.
 export default function About() {
     const { t } = useLanguage();
 

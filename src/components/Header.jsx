@@ -1,3 +1,4 @@
+// This file renders the top navigation and user controls.
 import React, { useState } from 'react';
 import { useAuth } from '../context/AuthContext.jsx';
 import { useLanguage } from '../context/LanguageContext.jsx';

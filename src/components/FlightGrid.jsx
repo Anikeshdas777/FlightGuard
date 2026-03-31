@@ -1,6 +1,8 @@
+// This file renders the grid of flight cards.
 import React from 'react';
 import FlightCard from './FlightCard.jsx';
 
+// This component renders the flight grid view.
 function FlightGrid({ flights, onSelect }) {
     if (flights.length === 0) {
         return (

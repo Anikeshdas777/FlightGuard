@@ -1,3 +1,4 @@
+# This file lists files and folders Git should ignore.
 node_modules
 dist
 *.zip

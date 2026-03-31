@@ -1,3 +1,4 @@
+// This file fetches and normalizes live flight data from AirLabs.
 import { predictFlight } from './predictionEngine.js';
 import { generateWeatherData } from './flightUtils.js';
 
@@ -9,11 +10,13 @@ const API_KEYS = [
 
 let currentKeyIndex = 0;
 
+// This function returns the current API key to use.
 const getActiveApiKey = () => {
     if (API_KEYS.length === 0) return '';
     return API_KEYS[currentKeyIndex];
 };
 
+// This function switches to the next API key.
 const rotateToNextKey = () => {
     if (API_KEYS.length <= 1) return false; // Nothing to rotate to
     currentKeyIndex = (currentKeyIndex + 1) % API_KEYS.length;

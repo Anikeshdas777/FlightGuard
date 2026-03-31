@@ -1,3 +1,4 @@
+// This file stores shared static data used across the app.
 export const AIRLINES = [
     'IndiGo', 'SpiceJet', 'Air India', 'Vistara', 'Go First',
     'AirAsia India', 'Air India Express', 'Alliance Air'

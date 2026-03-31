@@ -1,13 +1,16 @@
+// This file shows the weather, airport, and news sidebar widgets.
 import React from 'react';
 import { randomChoices } from '../utils/flightUtils.js';
 import { AIRPORTS, NEWS_TOPICS } from '../data/constants.js';
 import { useLanguage } from '../context/LanguageContext.jsx';
 
+// This function creates a simple timestamp label for news.
 function generateNewsTimestamp() {
     const hoursAgo = Math.floor(Math.random() * 24) + 1;
     return `${hoursAgo}h ago`;
 }
 
+// This component renders the sidebar view.
 function Sidebar({ weather, airportStatuses, news }) {
     const { t } = useLanguage();
     return (

@@ -1,3 +1,4 @@
+// This file stores the Sanskrit translation strings.
 const sa = {
     // Header / Nav
     dashboard: 'नियन्त्रणपट्टिका',

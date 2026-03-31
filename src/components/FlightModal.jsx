@@ -1,8 +1,11 @@
+// This file shows detailed information for a selected flight.
 import React, { useEffect } from 'react';
 import { formatTime } from '../utils/flightUtils.js';
 
+// This component renders the flight modal view.
 function FlightModal({ flight, onClose }) {
     useEffect(() => {
+        // This function handles handle key.
         function handleKey(e) {
             if (e.key === 'Escape') onClose();
         }

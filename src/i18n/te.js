@@ -1,3 +1,4 @@
+// This file stores the Telugu translation strings.
 const te = {
     // Header / Nav
     dashboard: 'డాష్‌బోర్డ్',

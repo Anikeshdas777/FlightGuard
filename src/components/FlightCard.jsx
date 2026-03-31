@@ -1,6 +1,8 @@
+// This file renders a single flight summary card.
 import React from 'react';
 import { formatTime } from '../utils/flightUtils.js';
 
+// This component renders the flight card view.
 function FlightCard({ flight, onSelect }) {
     return (
         <div className="flight-card" onClick={() => onSelect(flight)}>

@@ -1,3 +1,4 @@
+// This file stores airport coordinate lookup helpers.
 export const airportCoordinates = {
     'Delhi': [28.5562, 77.1000],
     'Mumbai': [19.0896, 72.8656],
@@ -19,6 +20,7 @@ export const airportCoordinates = {
 // Fallback to center of India if airport not found
 const FALLBACK_COORD = [20.5937, 78.9629];
 
+// This function returns map coordinates for a city name.
 export function getCoordinates(cityName) {
     if (!cityName) return FALLBACK_COORD;
     // Handle potential casing or slight variations

@@ -1,6 +1,8 @@
+// This file renders the flight search and filter controls.
 import React from 'react';
 import { useLanguage } from '../context/LanguageContext.jsx';
 
+// This component renders the search bar view.
 function SearchBar({ searchTerm, riskFilter, sortBy, onSearchChange, onRiskChange, onSortChange }) {
     const { t } = useLanguage();
     return (

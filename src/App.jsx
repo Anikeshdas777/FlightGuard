@@ -1,3 +1,4 @@
+// This file assembles the main FlightGuard application screens and providers.
 import React, { useState, useEffect, useMemo, useCallback } from 'react';
 import { AuthProvider, useAuth } from './context/AuthContext.jsx';
 import { LanguageProvider, useLanguage } from './context/LanguageContext.jsx';
@@ -31,6 +32,7 @@ import {
 } from './utils/flightUtils.js';
 import { AIRPORTS, NEWS_TOPICS } from './data/constants.js';
 
+// This function creates sample airport delay status data.
 function generateAirportStatuses() {
     return randomChoices(AIRPORTS, 3).map((airport) => ({
         airport,
@@ -116,6 +118,7 @@ function AppInner() {
 
     // Rotate city every 10 seconds for the weather widget
     useEffect(() => {
+        // This function handles city interval.
         const cityInterval = setInterval(() => {
             setCityIndex(prev => (prev + 1) % WEATHER_CITIES.length);
         }, 10000);
@@ -129,6 +132,7 @@ function AppInner() {
 
     // Live updates every 5 seconds
     useEffect(() => {
+        // This function handles interval.
         const interval = setInterval(() => {
             setFlights((prev) =>
                 prev.map((flight) => {

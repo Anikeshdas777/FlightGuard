@@ -1,3 +1,4 @@
+// This file shows the signed-in user profile page.
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '../context/AuthContext.jsx';
 import {
@@ -10,6 +11,7 @@ import { useLanguage } from '../context/LanguageContext.jsx';
 
 const AIRLINE_LIST = typeof AIRLINES !== 'undefined' ? AIRLINES : ['IndiGo', 'Air India', 'Vistara', 'SpiceJet', 'Akasa Air', 'GoAir'];
 
+// This component renders the risk badge view.
 function RiskBadge({ level }) {
     const styles = {
         low: { bg: 'rgba(34,197,94,0.12)', color: '#22c55e', border: '1px solid rgba(34,197,94,0.3)' },
@@ -25,6 +27,7 @@ function RiskBadge({ level }) {
     );
 }
 
+// This component renders the profile page view.
 export default function ProfilePage({ onNavigate }) {
     const { user, logout } = useAuth();
     const { t } = useLanguage();
@@ -41,11 +44,13 @@ export default function ProfilePage({ onNavigate }) {
         setPrefs(getPreferences(user.uid) || { homeAirport: '', favoriteAirlines: [] });
     }, [user]);
 
+    // This function handles handle delete route.
     const handleDeleteRoute = (id) => {
         removeRoute(user.uid, id);
         setRoutes(getSavedRoutes(user.uid));
     };
 
+    // This function handles toggle airline.
     const toggleAirline = (airline) => {
         setPrefs(p => {
             const favs = p.favoriteAirlines || [];
@@ -57,6 +62,7 @@ export default function ProfilePage({ onNavigate }) {
         setPrefsSaved(false);
     };
 
+    // This function handles handle save prefs.
     const handleSavePrefs = () => {
         savePreferences(user.uid, prefs);
         setPrefsSaved(true);
@@ -216,6 +222,7 @@ export default function ProfilePage({ onNavigate }) {
                         <label style={{ display: 'block', fontWeight: 600, color: '#c0c0c0', fontSize: '1.07rem', marginBottom: '0.75rem' }}>{t('favAirlines')}</label>
                         <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem' }}>
                             {AIRLINE_LIST.map(airline => {
+                                // This function handles selected.
                                 const selected = (prefs.favoriteAirlines || []).includes(airline);
                                 return (
                                     <button key={airline} onClick={() => toggleAirline(airline)} style={{

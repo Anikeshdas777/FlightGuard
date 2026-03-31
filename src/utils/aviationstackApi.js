@@ -46,6 +46,7 @@ export async function fetchAirportStatus(airportCode, airportName) {
     let cancelledCount = 0;
 
     flights.forEach(f => {
+        // This function handles status.
         const status = (f.flight_status || '').toLowerCase();
         if (status === 'cancelled') {
             cancelledCount++;
@@ -108,6 +109,7 @@ export async function fetchLiveFlightAlerts(airportCodes = ['DEL', 'BOM', 'BLR',
             if (!flights) continue;
 
             flights.forEach(f => {
+                // This function handles status.
                 const status = (f.flight_status || '').toLowerCase();
                 const delay = f.departure?.delay || 0;
                 const flightIata = f.flight?.iata || f.flight?.number || 'Unknown';

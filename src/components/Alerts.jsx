@@ -1,3 +1,4 @@
+// This file shows live alerts and important disruption updates.
 import React, { useState, useMemo } from 'react';
 
 // Dark theme tokens
@@ -84,6 +85,7 @@ const SEVERITY_CONFIG = {
 
 const CATEGORIES = ['All', 'Weather', 'Operational', 'Security', 'News', 'Info'];
 
+// This component renders the alerts view.
 export default function Alerts({ liveAlerts = [], alarmingNews = [] }) {
     const [filter, setFilter] = useState('All');
     const [dismissed, setDismissed] = useState(new Set());

@@ -1,18 +1,23 @@
+// This file contains helper functions for mock flight and risk data.
 import { AIRLINES, AIRPORTS, WEATHER_CONDITIONS, DELAY_FACTORS } from '../data/constants.js';
 
+// This function returns a random whole number in a range.
 export function randomInt(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
+// This function picks one random item from a list.
 export function randomChoice(array) {
     return array[randomInt(0, array.length - 1)];
 }
 
+// This function picks multiple random items from a list.
 export function randomChoices(array, count) {
     const shuffled = [...array].sort(() => 0.5 - Math.random());
     return shuffled.slice(0, count);
 }
 
+// This function formats a date into a simple time string.
 export function formatTime(date) {
     return date.toLocaleTimeString('en-US', {
         hour: '2-digit',
@@ -21,6 +26,7 @@ export function formatTime(date) {
     });
 }
 
+// This function shows how much time has passed since a date.
 export function formatTimeSince(date) {
     const seconds = Math.floor((new Date() - date) / 1000);
     if (seconds < 10) return 'Just now';
@@ -31,6 +37,7 @@ export function formatTimeSince(date) {
     return `${hours}h ago`;
 }
 
+// This function creates sample weather data for the app.
 export function generateWeatherData() {
     return {
         condition: randomChoice(WEATHER_CONDITIONS),
@@ -41,6 +48,7 @@ export function generateWeatherData() {
     };
 }
 
+// This function calculates a delay risk score for a flight.
 export function calculateDelayRisk(weather, departureTime, factors) {
     let riskScore = randomInt(0, 30);
 
@@ -65,6 +73,7 @@ export function calculateDelayRisk(weather, departureTime, factors) {
     return Math.min(riskScore, 100);
 }
 
+// This function converts a risk score into a risk label.
 export function getRiskLevel(score) {
     if (score < 25) return 'low';
     if (score < 50) return 'medium';
@@ -72,12 +81,14 @@ export function getRiskLevel(score) {
     return 'critical';
 }
 
+// This function builds a flight number from an airline name.
 function generateFlightNumber(airline) {
     const airlineCode = airline.substring(0, 2).toUpperCase();
     const number = randomInt(100, 9999);
     return `${airlineCode}${number}`;
 }
 
+// This function creates one sample flight record.
 export function generateFlight() {
     const airline = randomChoice(AIRLINES);
     const origin = randomChoice(AIRPORTS);
@@ -117,12 +128,14 @@ export function generateFlight() {
     };
 }
 
+// This function creates the starting list of sample flights.
 export function generateInitialFlights(count = 12) {
     const flights = [];
     for (let i = 0; i < count; i++) flights.push(generateFlight());
     return flights.sort((a, b) => b.riskScore - a.riskScore);
 }
 
+// This function creates a simple timestamp label for news.
 export function generateNewsTimestamp() {
     const hoursAgo = randomInt(1, 24);
     return `${hoursAgo}h ago`;

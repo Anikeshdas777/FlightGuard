@@ -1,3 +1,4 @@
+// This file shows the flight delay prediction experience.
 import React, { useState, useEffect, useRef } from 'react';
 import { loadFlightSchedule, findFlight, operatesOnDay } from '../utils/csvParser.js';
 import { fetchWeather } from '../utils/weatherApi.js';
@@ -17,6 +18,7 @@ const AIRLINES = [
 
 const DAYS = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 
+// This component renders the risk gauge view.
 function RiskGauge({ score, color, t }) {
     // Clamp score and prevent it from being exactly 0 so the SVG path renders properly
     const clampedScore = Math.max(0.01, Math.min(100, score || 0));
@@ -44,6 +46,7 @@ function RiskGauge({ score, color, t }) {
     );
 }
 
+// This component renders the breakdown bar view.
 function BreakdownBar({ label, value, max, color }) {
     const pct = Math.min(100, (value / max) * 100);
     return (
@@ -62,6 +65,7 @@ function BreakdownBar({ label, value, max, color }) {
     );
 }
 
+// This component renders the flight predictor view.
 export default function FlightPredictor({ onPrediction }) {
     const { t } = useLanguage();
     const [schedule, setSchedule] = useState([]);
@@ -88,6 +92,7 @@ export default function FlightPredictor({ onPrediction }) {
         });
     }, []);
 
+    // This function handles handle predict.
     async function handlePredict(e) {
         e.preventDefault();
         setError('');
@@ -298,6 +303,7 @@ export default function FlightPredictor({ onPrediction }) {
     );
 }
 
+// This component renders the result card view.
 function ResultCard({ result, t }) {
     const { lang } = useLanguage();
     const { flight, prediction, timeSeries, weather, dayName, doesOperate, date } = result;
@@ -307,6 +313,7 @@ function ResultCard({ result, t }) {
         ? `https://openweathermap.org/img/wn/${weather.icon}@2x.png`
         : null;
 
+    // This function handles handle speak.
     const handleSpeak = () => {
         if (!('speechSynthesis' in window)) {
             alert("Sorry, your browser doesn't support text to speech!");
@@ -569,6 +576,7 @@ function ResultCard({ result, t }) {
     );
 }
 
+// This component renders the stat box view.
 function StatBox({ label, value, color }) {
     return (
         <div style={{
@@ -581,6 +589,7 @@ function StatBox({ label, value, color }) {
     );
 }
 
+// This component renders the weather stat view.
 function WeatherStat({ label, value }) {
     return (
         <div style={{ background: 'rgba(255,255,255,0.05)', borderRadius: '8px', padding: '8px 10px' }}>

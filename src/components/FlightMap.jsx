@@ -1,3 +1,4 @@
+// This file shows flights on an interactive map.
 import React, { useEffect, useRef } from 'react';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
@@ -34,6 +35,7 @@ const destIcon = new L.Icon({
     shadowSize: [41, 41]
 });
 
+// This component renders the flight map view.
 export default function FlightMap({ origin, destination, riskColor }) {
     const { t } = useLanguage();
     const mapRef = useRef(null);

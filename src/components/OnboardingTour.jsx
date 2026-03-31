@@ -1,3 +1,4 @@
+// This file guides new users through the app features.
 import React, { useState, useEffect } from 'react';
 
 const TOUR_STEPS = [
@@ -21,6 +22,7 @@ const TOUR_STEPS = [
     }
 ];
 
+// This component renders the onboarding tour view.
 export default function OnboardingTour() {
     const [currentStep, setCurrentStep] = useState(0);
     const [isVisible, setIsVisible] = useState(false);
@@ -44,6 +46,7 @@ export default function OnboardingTour() {
     useEffect(() => {
         if (!isVisible) return;
 
+        // This function handles handle resize.
         const handleResize = () => updateTargetPosition(currentStep);
         window.addEventListener('resize', handleResize);
 
@@ -57,6 +60,7 @@ export default function OnboardingTour() {
         };
     }, [isVisible, currentStep]);
 
+    // This function handles update target position.
     const updateTargetPosition = (stepIndex) => {
         const step = TOUR_STEPS[stepIndex];
         if (!step) return;
@@ -80,6 +84,7 @@ export default function OnboardingTour() {
         }
     };
 
+    // This function handles handle next.
     const handleNext = () => {
         if (currentStep < TOUR_STEPS.length - 1) {
             setCurrentStep(prev => prev + 1);
@@ -89,10 +94,12 @@ export default function OnboardingTour() {
         }
     };
 
+    // This function handles handle skip.
     const handleSkip = () => {
         completeTour();
     };
 
+    // This function handles complete tour.
     const completeTour = () => {
         setIsVisible(false);
         localStorage.setItem('flightguard_tour_completed', 'true');

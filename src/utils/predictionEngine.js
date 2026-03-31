@@ -1,3 +1,4 @@
+// This file calculates delay predictions and forecast data.
 import { AIRLINE_RELIABILITY, MONTH_RISK } from './csvParser.js';
 import { getWeatherRisk } from './weatherApi.js';
 

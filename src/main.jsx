@@ -1,3 +1,4 @@
+// This file mounts the React app into the browser.
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App.jsx';

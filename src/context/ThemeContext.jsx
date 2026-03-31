@@ -1,7 +1,9 @@
+// This file manages the app theme state.
 import React, { createContext, useContext, useState, useEffect } from 'react';
 
 const ThemeContext = createContext();
 
+// This component provides the theme state to child components.
 export function ThemeProvider({ children }) {
     const [theme, setTheme] = useState(() => {
         try {
@@ -27,6 +29,7 @@ export function ThemeProvider({ children }) {
     );
 }
 
+// This hook returns the theme data and actions.
 export function useTheme() {
     const context = useContext(ThemeContext);
     if (!context) {

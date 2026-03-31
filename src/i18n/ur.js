@@ -1,3 +1,4 @@
+// This file stores the Urdu translation strings.
 const ur = {
     // Header / Nav
     dashboard: 'ڈیش بورڈ',

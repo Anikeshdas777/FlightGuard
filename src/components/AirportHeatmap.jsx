@@ -1,3 +1,4 @@
+// This file shows the airport congestion heatmap view.
 import React, { useState, useMemo } from 'react';
 import { AIRPORTS } from '../data/constants.js';
 
@@ -26,6 +27,7 @@ function generateCongestionData() {
         for (let h = 0; h < 24; h++) {
             // Base from pattern × tier, add randomness ±10
             const base = hourPattern[h] * tier;
+            // This function handles jitter.
             const jitter = (Math.random() - 0.5) * 20;
             const value = Math.max(2, Math.min(100, Math.round(base + jitter)));
             row.push(value);
@@ -36,6 +38,7 @@ function generateCongestionData() {
     return data;
 }
 
+// This function handles get congestion color.
 function getCongestionColor(value) {
     if (value <= 25) return { bg: 'rgba(34, 197, 94, 0.7)', label: 'Low' };
     if (value <= 50) return { bg: 'rgba(234, 179, 8, 0.65)', label: 'Moderate' };
@@ -43,6 +46,7 @@ function getCongestionColor(value) {
     return { bg: 'rgba(239, 68, 68, 0.85)', label: 'Very Busy' };
 }
 
+// This function handles get congestion text color.
 function getCongestionTextColor(value) {
     if (value <= 25) return '#22c55e';
     if (value <= 50) return '#eab308';
@@ -50,6 +54,7 @@ function getCongestionTextColor(value) {
     return '#ef4444';
 }
 
+// This component renders the airport heatmap view.
 export default function AirportHeatmap() {
     const [congestionData] = useState(() => generateCongestionData());
     const [tooltip, setTooltip] = useState(null);
@@ -82,6 +87,7 @@ export default function AirportHeatmap() {
         return { busiestAirport, peakHour, currentAvg };
     }, [congestionData, currentHour]);
 
+    // This function handles format hour.
     const formatHour = (h) => {
         if (h === 0) return '12AM';
         if (h < 12) return `${h}AM`;

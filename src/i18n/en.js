@@ -1,3 +1,4 @@
+// This file stores the English translation strings.
 const en = {
     // Header / Nav
     dashboard: 'Dashboard',

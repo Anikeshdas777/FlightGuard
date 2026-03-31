@@ -1,3 +1,4 @@
+// This file shows an India map with flight route visuals.
 import React, { useEffect, useRef, useMemo } from 'react';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
@@ -25,7 +26,9 @@ const RISK_COLORS = {
 function computeArc(from, to, segments = 30) {
     const [lat1, lng1] = from;
     const [lat2, lng2] = to;
+    // This function handles mid lat.
     const midLat = (lat1 + lat2) / 2;
+    // This function handles mid lng.
     const midLng = (lng1 + lng2) / 2;
     const dLat = lat2 - lat1;
     const dLng = lng2 - lng1;
@@ -46,6 +49,7 @@ function computeArc(from, to, segments = 30) {
     return points;
 }
 
+// This component renders the india flight map view.
 export default function IndiaFlightMap({ flights = [] }) {
     const mapContainerRef = useRef(null);
     const mapInstanceRef = useRef(null);
@@ -90,6 +94,7 @@ export default function IndiaFlightMap({ flights = [] }) {
             .filter(Boolean);
     }, [flights]);
 
+    // This function handles airport activity.
     const airportActivity = useMemo(() => {
         const counts = {};
         routes.forEach(r => {
@@ -99,6 +104,7 @@ export default function IndiaFlightMap({ flights = [] }) {
         return counts;
     }, [routes]);
 
+    // This function handles delayed airports.
     const delayedAirports = useMemo(() => {
         const delayed = new Set();
         routes.forEach(r => {
@@ -109,6 +115,7 @@ export default function IndiaFlightMap({ flights = [] }) {
         return delayed;
     }, [routes]);
 
+    // This function handles active airports.
     const activeAirports = useMemo(() => {
         return AIRPORTS.filter(ap => ap.lat && ap.lng && airportActivity[ap.code]);
     }, [airportActivity]);
