@@ -284,6 +284,7 @@ function animateCounter(elementId, target) {
     if (steps === 0) return;
 
     let count = current;
+    // This function handles interval.
     const interval = setInterval(() => {
         count += increment;
         element.textContent = count;
@@ -336,6 +337,7 @@ function renderWeatherInfo() {
 // This function renders the airport status widget content.
 function renderAirportInfo() {
     const airports = randomChoices(AIRPORTS, 3);
+    // This function handles html.
     const html = airports.map(airport => {
         const isDelayed = Math.random() > 0.6;
         return `
